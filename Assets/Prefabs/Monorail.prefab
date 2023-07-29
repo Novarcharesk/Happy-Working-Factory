@@ -1,0 +1,579 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8459899541855066870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8459899541855066871}
+  m_Layer: 0
+  m_Name: Monorail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8459899541855066871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459899541855066870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -41.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8281311242320403392}
+  - {fileID: 8281311240919958847}
+  - {fileID: 8281311242909165519}
+  - {fileID: 8281311242761376353}
+  - {fileID: 8281311241821356925}
+  - {fileID: 8281311241860963443}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8459899541568733220
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8459899541855066871}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.517
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14849
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.138461
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 57ed15f561904044da11b3f78b7940b9,
+        type: 3}
+      propertyPath: m_Name
+      value: monorail_trainFront
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 57ed15f561904044da11b3f78b7940b9, type: 3}
+--- !u!4 &8281311242909165519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 57ed15f561904044da11b3f78b7940b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8459899541568733220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8459899541750085002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8459899541855066871}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.4965
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14849
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_Name
+      value: monorail_trainPassenger (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1242c292df4fc44bb386ec342f96c12, type: 3}
+--- !u!4 &8281311242761376353 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+    type: 3}
+  m_PrefabInstance: {fileID: 8459899541750085002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8459899542165896235
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8459899541855066871}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.0649
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14849
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.168
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c21fe71e7d4308143beb00a1298e02a1,
+        type: 3}
+      propertyPath: m_Name
+      value: monorail_trainFlat
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c21fe71e7d4308143beb00a1298e02a1, type: 3}
+--- !u!4 &8281311242320403392 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c21fe71e7d4308143beb00a1298e02a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8459899542165896235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8459899542650698648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8459899541855066871}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.1332
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14849
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.163
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7d8204c8e47814c44990f5af7abc0715,
+        type: 3}
+      propertyPath: m_Name
+      value: monorail_trainEnd
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d8204c8e47814c44990f5af7abc0715, type: 3}
+--- !u!4 &8281311241860963443 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7d8204c8e47814c44990f5af7abc0715,
+    type: 3}
+  m_PrefabInstance: {fileID: 8459899542650698648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8459899542690292886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8459899541855066871}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.5785
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14849
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_Name
+      value: monorail_trainPassenger (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1242c292df4fc44bb386ec342f96c12, type: 3}
+--- !u!4 &8281311241821356925 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+    type: 3}
+  m_PrefabInstance: {fileID: 8459899542690292886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8459899543600145108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8459899541855066871}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3712
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.9527
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14849
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c1242c292df4fc44bb386ec342f96c12,
+        type: 3}
+      propertyPath: m_Name
+      value: monorail_trainPassenger
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1242c292df4fc44bb386ec342f96c12, type: 3}
+--- !u!4 &8281311240919958847 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c1242c292df4fc44bb386ec342f96c12,
+    type: 3}
+  m_PrefabInstance: {fileID: 8459899543600145108}
+  m_PrefabAsset: {fileID: 0}
