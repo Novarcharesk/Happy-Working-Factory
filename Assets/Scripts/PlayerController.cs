@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 originalPosition;
     private bool isMoving = false;
     private GameObject heldBox; // Reference to the currently held box, if any
+
+    [Header("Controller Settings")]
+    [SerializeField] private PlayerInput playerControllerInput;
+    private Vector2 controllerMoveDirection;
 
     private void Start()
     {
@@ -94,5 +99,22 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("Box picked up or dropped!");
         }
+
+        if (controllerMoveDirection != new Vector2(0f,0f))
+        {
+            isMoving = true;
+            ControllerMove();
+        }
+        else
+        {
+            isMoving = false;
+        }
     }
+
+    private void ControllerMove()
+    {
+        transform.position += new Vector3(controllerMoveDirection.x, 0, controllerMoveDirection.y) * Time.deltaTime * movementSpeed;
+    }
+
+    public void OnControllerMove(InputAction.CallbackContext ctx) => controllerMoveDirection = ctx.ReadValue<Vector2>();
 }
