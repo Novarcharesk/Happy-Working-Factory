@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode rightKey;
     [SerializeField] private KeyCode leftKey;
     [SerializeField] private KeyCode backKey;
+    [SerializeField] private KeyCode pickupKey; // New key to pick up and drop the box
 
     [Header("Bobbing")]
     [SerializeField] private float bobbingSpeed = 2f;
     [SerializeField] private float bobbingHeight = 0.1f;
     private Vector3 originalPosition;
     private bool isMoving = false;
+    private GameObject heldBox; // Reference to the currently held box, if any
 
     private void Start()
     {
@@ -64,6 +66,33 @@ public class PlayerController : MonoBehaviour
         {
             float newY = originalPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
             transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
+        }
+
+        // Handle box pickup
+        if (Input.GetKeyDown(pickupKey))
+        {
+            if (heldBox == null)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.forward, out hit, 3f))
+                {
+                    if (hit.collider.CompareTag("Box"))
+                    {
+                        Debug.Log("Box hit by raycast!");
+                        heldBox = hit.collider.gameObject;
+                        heldBox.GetComponent<Rigidbody>().isKinematic = true;
+                        heldBox.transform.SetParent(transform);
+                        heldBox.transform.localPosition = Vector3.forward * 1.5f;
+                    }
+                }
+            }
+            else
+            {
+                heldBox.GetComponent<Rigidbody>().isKinematic = false;
+                heldBox.transform.SetParent(null);
+                heldBox = null;
+            }
+            Debug.Log("Box picked up or dropped!");
         }
     }
 }

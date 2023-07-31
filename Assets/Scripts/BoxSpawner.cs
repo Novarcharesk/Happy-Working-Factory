@@ -7,7 +7,8 @@ public class BoxSpawner : MonoBehaviour
     public GameObject prefabToSpawn;
     public float spawnDelay = 2f;
     public int maxSpawns = 10;
-    public GameObject conveyerBelt;
+    public BoxMovement conveyerBelt;
+    public Transform designatedSpot;
 
     private int spawnCount = 0;
 
@@ -24,7 +25,15 @@ public class BoxSpawner : MonoBehaviour
         GameObject newBox = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
         spawnCount++;
 
-        // Attach the box to the conveyer belt as a child
-        newBox.transform.SetParent(conveyerBelt.transform, true);
+        // Set the designated spot for the box movement
+        BoxMovement boxMovement = newBox.GetComponent<BoxMovement>();
+        if (boxMovement != null)
+            boxMovement.designatedSpot = designatedSpot;
+    }
+
+    public void BoxDelivered()
+    {
+        // This method will be called by the MonorailController when a box is delivered
+        // You can add code here to handle what happens when the box is delivered, e.g., increment score, play a sound effect, etc.
     }
 }

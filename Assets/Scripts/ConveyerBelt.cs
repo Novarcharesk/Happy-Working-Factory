@@ -1,57 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class ObjectSpawner : MonoBehaviour
-{
-    public GameObject prefabToSpawn;
-    public float spawnDelay = 2f;
-    public int maxSpawns = 10;
-    public GameObject conveyerBelt;
-    public Transform designatedSpot;
-
-    private int spawnCount = 0;
-
-    private void Start()
-    {
-        InvokeRepeating("SpawnObject", 0f, spawnDelay);
-    }
-
-    private void SpawnObject()
-    {
-        if (spawnCount >= maxSpawns)
-            return;
-
-        GameObject newBox = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
-        spawnCount++;
-
-        // Attach the box to the conveyer belt as a child
-        newBox.transform.SetParent(conveyerBelt.transform, true);
-    }
-}
 
 public class ConveyerBelt : MonoBehaviour
 {
     public float conveyerSpeed = 2f;
+    public Transform designatedSpot;
 
     private void OnTriggerStay(Collider other)
     {
-        // Move the box along the conveyer belt towards the designated spot
         if (other.CompareTag("Box"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            Vector3 movement = (transform.parent.position - other.transform.position).normalized;
-            rb.velocity = movement * conveyerSpeed;
+
+            // Calculate the velocity of the conveyor belt's surface in world space
+            Vector3 conveyerVelocity = transform.TransformVector(Vector3.forward) * conveyerSpeed;
+
+            // Move the box along with the conveyor belt's surface velocity
+            rb.velocity = conveyerVelocity;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Stop the box when it exits the conveyer belt area
         if (other.CompareTag("Box"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
+            rb.useGravity = true;
+
+            // Detach the box from the conveyor belt's parent to let it fall naturally
+            other.transform.SetParent(null);
         }
     }
 }
