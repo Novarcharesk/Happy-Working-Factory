@@ -5604,8 +5604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScoreTexts:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1749613970}
+  - {fileID: 959450615}
 --- !u!4 &1749419883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f351e57001c60043a13e1127ca4a8e4,

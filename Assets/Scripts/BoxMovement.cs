@@ -64,6 +64,29 @@ public class BoxMovement : MonoBehaviour
         isPlayer1Box = player1Box;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("BurnerHazard"))
+        {
+            // Call the OnBurnerCollision method when the box collides with the burner hazard
+            OnBurnerCollision(other.gameObject);
+        }
+    }
+
+    public void OnBurnerCollision(GameObject burner)
+    {
+        // Disable the box's collider and renderer while it's burning
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
+
+        // Start the burning process using the BurnerHazard script (if available)
+        BurnerHazard burnerHazard = burner.GetComponent<BurnerHazard>();
+        if (burnerHazard != null)
+        {
+            StartCoroutine(burnerHazard.StopBurning(gameObject));
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         // Move the box along the conveyer belt towards the designated spot
@@ -72,21 +95,6 @@ public class BoxMovement : MonoBehaviour
             Rigidbody rb = GetComponent<Rigidbody>();
             Vector3 movement = (other.transform.right * -1f).normalized * conveyerSpeed;
             rb.velocity = movement;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // Stop the box when it exits the conveyer belt area
-        if (other.CompareTag("ConveyerBelt"))
-        {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.velocity = Vector3.zero;
-            rb.isKinematic = true;
-
-            // Drop the box at its current position
-            transform.SetParent(null);
-            designatedSpot = null;
         }
     }
 }
