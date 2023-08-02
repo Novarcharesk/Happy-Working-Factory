@@ -1,10 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    public Text[] playerScoreTexts; // Array to hold the Text components for both players' scores
+    public TMPro.TextMeshProUGUI[] playerScoreTexts; // Array to hold the TextMeshProUGUI components for both players' scores
 
     private int[] playerScores = new int[2]; // Array to hold the scores of Player 1 and Player 2
 
@@ -29,7 +30,8 @@ public class ScoreUI : MonoBehaviour
     {
         for (int i = 0; i < playerScoreTexts.Length; i++)
         {
-            playerScoreTexts[i].text = "Player " + (i + 1) + " Score: " + playerScores[i];
+            // Use custom labels 'P1:' and 'P2:' along with the respective player scores
+            playerScoreTexts[i].text = "P" + (i + 1) + ": " + playerScores[i];
         }
     }
 }
