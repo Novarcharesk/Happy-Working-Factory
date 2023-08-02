@@ -9,6 +9,7 @@ public class BoxSpawner : MonoBehaviour
     public int maxSpawns = 10;
     public BoxMovement conveyerBelt;
     public Transform designatedSpot;
+    public ScoreUI scoreUI; // Reference to the ScoreUI script
 
     private int spawnCount = 0;
 
@@ -29,11 +30,30 @@ public class BoxSpawner : MonoBehaviour
         BoxMovement boxMovement = newBox.GetComponent<BoxMovement>();
         if (boxMovement != null)
             boxMovement.designatedSpot = designatedSpot;
+
+        // Set the box as delivered and specify which player's box it is (for scorekeeping)
+        bool isPlayer1Box = Random.value < 0.5f; // Randomly decide which player's box it is
+        boxMovement.SetBoxAsDelivered(isPlayer1Box);
     }
 
     public void BoxDelivered()
     {
         // This method will be called by the MonorailController when a box is delivered
-        // You can add code here to handle what happens when the box is delivered, e.g., increment score, play a sound effect, etc.
+        // Increment the score for the player who delivered the box
+        if (designatedSpot != null)
+        {
+            BoxMovement boxMovement = designatedSpot.GetComponent<BoxMovement>();
+            if (boxMovement != null && boxMovement.IsDelivered())
+            {
+                if (boxMovement.IsPlayer1Box())
+                {
+                    scoreUI.IncreasePlayer1Score();
+                }
+                else
+                {
+                    scoreUI.IncreasePlayer2Score();
+                }
+            }
+        }
     }
 }
