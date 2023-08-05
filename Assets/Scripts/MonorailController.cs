@@ -4,37 +4,69 @@ using UnityEngine;
 
 public class MonorailController : MonoBehaviour
 {
+    // Declarartion of the box prefab
     [SerializeField] private GameObject boxPrefab;
 
+    //Declaration of the boundrys needed for the monorail
     private GameObject leftBoundary;
     private GameObject rightBoundary;
     private GameObject midPosition;
 
-    private bool cargoLoaded = false;
+    // Declaration of the bool that control if cargo is loaded on the train
+    public static bool cargoLoaded = false;
+    private bool waitingToLeave = false;
 
     [SerializeField] private Collider boxStorageCollider;
-    private List<GameObject> cargoList;
+    [SerializeField] private List<string> cargoList;
+    private int cargoListIndex;
 
+    Coroutine runningRoutine = null;
+
+    // Runs at satrt
     void Start()
     {
+        // sets the boundries
         leftBoundary = FindObjectOfType<MonorailSpawner>().leftMonorailBoundary;
         rightBoundary = FindObjectOfType<MonorailSpawner>().rightMonorailBoundary;
         midPosition = FindObjectOfType<MonorailSpawner>().midMonorailPosition;
 
-        StartCoroutine(MoveMonorailToMid());
+        //Starts the monorail movement routine
+        runningRoutine = StartCoroutine(MoveMonorailToMid());
     }
 
-    public void PlaceBoxOnMonorail(string lastTouchedBy)
+    // Ruins every frame
+    private void Update()
     {
-        // Implement the logic to place the box on the monorail.
-        // For example, instantiate the box prefab and position it on the monorail.
-        // You may want to adjust the height and position of the box based on your monorail's design.
-        // You can also attach the box to the monorail using parenting or other methods.
-        
-        GameObject newBox = Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity);
-        cargoList.Add(newBox);
+        // Checks to see if there is cargo loaded on the monorail
+        if (cargoLoaded)
+        {
+            waitingToLeave = true;
+            runningRoutine = StartCoroutine("MoveMonorailToEnd");
+        }
     }
 
+    // Method that places a box on the monorail
+    public void PlaceBoxOnMonorail(string lastTouchedBy)
+    {   
+        GameObject newBox = Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity, this.boxStorageCollider.transform);
+        if (lastTouchedBy == "Player1")
+        {
+            newBox.GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+        
+        if (lastTouchedBy == "Player2")
+        {
+            newBox.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+
+        newBox.GetComponent<BoxCollider>().enabled = false;
+
+        Debug.Log(lastTouchedBy);
+        cargoList.Add(lastTouchedBy);
+        cargoListIndex++;
+    }
+
+    // Routine that moves the monorail to the mid point
     private IEnumerator MoveMonorailToMid()
     {
         while (true)
@@ -45,27 +77,39 @@ public class MonorailController : MonoBehaviour
             }
             else
             {
-                StopCoroutine(MoveMonorailToMid());
-                StartCoroutine(MoveMonorailToEnd());
+                StopAllCoroutines();
             }
             yield return null;
         }
     }
 
+    // Routine that moves the monorail from the mid point to the end
     private IEnumerator MoveMonorailToEnd()
     {
         while (true)
         {
-            if (transform.position.x >= 0 && !cargoLoaded) 
+            if (transform.position.x <= 26f)
             {
-                transform.Translate(+0.01f, 0, 0);
+                transform.Translate(+0.00005f, 0, 0);
             }
-            else if (transform.position.x >= rightBoundary.transform.position.x)
+            else
             {
-                StopCoroutine(MoveMonorailToEnd());
+                StopAllCoroutines();
+                MonorailSpawner.monorailPresent = false;
+                cargoLoaded = false;
+
+                UpdateScore();
+
                 Destroy(gameObject);
             }
-            yield return new WaitForSeconds(5);
+            yield return null;
         }
+
+    }
+
+    // Method when updating the score
+    private void UpdateScore()
+    {
+        Debug.Log("score updated");
     }
 }
