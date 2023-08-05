@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI[] playerScoreTexts; // Array to hold the TextMeshProUGUI components for both players' scores
+    public TextMeshProUGUI[] playerScoreTexts; // Linked UI Text elements for both players' scores
 
     private int[] playerScores = new int[2]; // Array to hold the scores of Player 1 and Player 2
 
