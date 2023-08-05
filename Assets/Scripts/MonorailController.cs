@@ -1,89 +1,71 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonorailController : MonoBehaviour
 {
-    private bool isWaitingForPlayer = false;
-    private Vector3 initialPosition;
-    public Transform leftBoundary; // Reference to the left boundary GameObject
-    public Transform rightBoundary; // Reference to the right boundary GameObject
+    [SerializeField] private GameObject boxPrefab;
+
+    private GameObject leftBoundary;
+    private GameObject rightBoundary;
+    private GameObject midPosition;
+
+    private bool cargoLoaded = false;
+
+    [SerializeField] private Collider boxStorageCollider;
+    private List<GameObject> cargoList;
 
     void Start()
     {
-        // Find the left and right boundary objects under the MonorailSpawner
-        leftBoundary = transform.parent.Find("LeftBoundary");
-        rightBoundary = transform.parent.Find("RightBoundary");
+        leftBoundary = FindObjectOfType<MonorailSpawner>().leftMonorailBoundary;
+        rightBoundary = FindObjectOfType<MonorailSpawner>().rightMonorailBoundary;
+        midPosition = FindObjectOfType<MonorailSpawner>().midMonorailPosition;
 
-        initialPosition = transform.position;
-        MoveMonorail();
+        StartCoroutine(MoveMonorailToMid());
     }
 
-    public void MoveMonorail()
-    {
-        StartCoroutine(MoveRoutine());
-    }
-
-    public bool IsWaitingForPlayer
-    {
-        get { return isWaitingForPlayer; }
-    }
-
-    public void PlaceBoxOnMonorail()
+    public void PlaceBoxOnMonorail(string lastTouchedBy)
     {
         // Implement the logic to place the box on the monorail.
         // For example, instantiate the box prefab and position it on the monorail.
         // You may want to adjust the height and position of the box based on your monorail's design.
         // You can also attach the box to the monorail using parenting or other methods.
+        
+        GameObject newBox = Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity);
+        cargoList.Add(newBox);
     }
 
-    private IEnumerator MoveRoutine()
+    private IEnumerator MoveMonorailToMid()
     {
-        // Move monorail to the center position between left and right boundaries
-        Vector3 targetPosition = (leftBoundary.position + rightBoundary.position) / 2f;
-        float journeyLength = Vector3.Distance(initialPosition, targetPosition);
-        float startTime = Time.time;
-        float distanceCovered = 0f;
-
-        while (distanceCovered < journeyLength)
+        while (true)
         {
-            float fractionOfJourney = distanceCovered / journeyLength;
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, fractionOfJourney);
-            distanceCovered = Vector3.Distance(initialPosition, transform.position);
-            yield return null;
-        }
-
-        // Monorail has reached the center position, wait for player input
-        isWaitingForPlayer = true;
-
-        // Keep checking for player input until spacebar is pressed
-        while (isWaitingForPlayer)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (transform.position.x <= -0.5)
             {
-                // Player pressed spacebar, start moving again
-                isWaitingForPlayer = false;
-                StartCoroutine(MoveBackRoutine());
+                transform.Translate(+0.01f, 0, 0);
+            }
+            else
+            {
+                StopCoroutine(MoveMonorailToMid());
+                StartCoroutine(MoveMonorailToEnd());
             }
             yield return null;
         }
     }
 
-    private IEnumerator MoveBackRoutine()
+    private IEnumerator MoveMonorailToEnd()
     {
-        // Move monorail back to its initial position
-        float journeyLength = Vector3.Distance(initialPosition, transform.position);
-        float startTime = Time.time;
-        float distanceCovered = 0f;
-
-        while (distanceCovered < journeyLength)
+        while (true)
         {
-            float fractionOfJourney = distanceCovered / journeyLength;
-            transform.position = Vector3.Lerp(transform.position, initialPosition, fractionOfJourney);
-            distanceCovered = Vector3.Distance(initialPosition, transform.position);
-            yield return null;
+            if (transform.position.x >= 0 && !cargoLoaded) 
+            {
+                transform.Translate(+0.01f, 0, 0);
+            }
+            else if (transform.position.x >= rightBoundary.transform.position.x)
+            {
+                StopCoroutine(MoveMonorailToEnd());
+                Destroy(gameObject);
+            }
+            yield return new WaitForSeconds(5);
         }
-
-        // Monorail has reached its initial position, start moving to the right boundary again
-        MoveMonorail();
     }
 }
