@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxPusherHazard : MonoBehaviour
+public class BoxPusher : MonoBehaviour
 {
     [SerializeField] private GameObject pushStick;
 

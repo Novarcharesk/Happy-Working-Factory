@@ -52,13 +52,14 @@ public class BoxHandler : MonoBehaviour
     {
         MonorailController.cargoLoaded = true;
         monorailController.PlaceBoxOnMonorail(lastTouch);
-        Object.Destroy(box);
+        Destroy(box);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Monorail"))
         {
+            Debug.Log("monorail collision");
             OnMonorailCollision(gameObject);
         }
     }

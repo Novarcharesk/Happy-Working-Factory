@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class MonorailController : MonoBehaviour
 {
+    // Declaration of the things needed to summon the box and move the monorail
     [SerializeField] private GameObject boxPrefab;
     private GameObject leftBoundary;
     private GameObject rightBoundary;
     private GameObject midPosition;
 
+    // Decleration of the variables to check if there is something on the train
     public static bool cargoLoaded = false;
     private bool waitingToLeave = false;
 
     [SerializeField] private Collider boxStorageCollider;
     [SerializeField] private List<string> cargoList;
     private int cargoListIndex;
+    private GameObject monorailNewBox;
 
     Coroutine runningRoutine = null;
 
+    // Plays at start
     void Start()
-    {
+    {   
+        // Finds the corresponding variables from the monorail spawner script and set them
         leftBoundary = FindObjectOfType<MonorailSpawner>().leftMonorailBoundary;
         rightBoundary = FindObjectOfType<MonorailSpawner>().rightMonorailBoundary;
         midPosition = FindObjectOfType<MonorailSpawner>().midMonorailPosition;
@@ -27,8 +32,10 @@ public class MonorailController : MonoBehaviour
         runningRoutine = StartCoroutine(MoveMonorailToMid());
     }
 
+    // Plays everyframe
     private void Update()
     {
+        // Checks to see if there is cargo loaded
         if (cargoLoaded)
         {
             waitingToLeave = true;
@@ -36,25 +43,32 @@ public class MonorailController : MonoBehaviour
         }
     }
 
+    // Method that places a box on the train when called
     public void PlaceBoxOnMonorail(string lastTouchedBy)
     {
-        GameObject newBox = Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity, this.boxStorageCollider.transform);
+        Debug.Log("placing box on monorail");
         
+        // Spawns the box on the train
+        GameObject monorailNewBox = Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity, this.boxStorageCollider.transform);
+        
+        // Checking who touched the box last and changing the boxs colour
         if (lastTouchedBy == "Player1")
         {
-            newBox.GetComponent<MeshRenderer>().material.color = Color.blue;
+            monorailNewBox.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
         else if (lastTouchedBy == "Player2")
         {
-            newBox.GetComponent<MeshRenderer>().material.color = Color.red;
+            monorailNewBox.GetComponent<MeshRenderer>().material.color = Color.red;
         }
 
-        newBox.GetComponent<BoxCollider>().enabled = false;
+        monorailNewBox.GetComponent<BoxCollider>().enabled = false;
 
+        // Adds the spawned object to the list to track for scoring
         cargoList.Add(lastTouchedBy);
         cargoListIndex++;
     }
 
+    // Routine that moves the monorail to the midpoint
     private IEnumerator MoveMonorailToMid()
     {
         while (true)
@@ -71,6 +85,7 @@ public class MonorailController : MonoBehaviour
         }
     }
 
+    // Routine that moves the monorail to the end from the midpoint
     private IEnumerator MoveMonorailToEnd()
     {
         while (true)
@@ -81,18 +96,19 @@ public class MonorailController : MonoBehaviour
             }
             else
             {
-                StopAllCoroutines();
                 MonorailSpawner.monorailPresent = false;
                 cargoLoaded = false;
 
                 UpdateScore();
 
+                StopAllCoroutines();
                 Destroy(gameObject);
             }
             yield return null;
         }
     }
 
+    // Method that updates the score in the UI
     private void UpdateScore()
     {
         ScoreUI scoreUI = FindObjectOfType<ScoreUI>();
@@ -109,6 +125,8 @@ public class MonorailController : MonoBehaviour
                 {
                     scoreUI.IncreasePlayer2Score();
                 }
+                
+                cargoList.Clear();;
             }
         }
     }

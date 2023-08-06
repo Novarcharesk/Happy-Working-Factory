@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 8266510978058024100}
   - component: {fileID: 2226218544775628155}
   - component: {fileID: -6495402956889334087}
+  - component: {fileID: 286841642193990013}
   m_Layer: 0
   m_Name: astronautB
   m_TagString: Untagged
@@ -565,8 +566,10 @@ MonoBehaviour:
   rightKey: 275
   leftKey: 276
   backKey: 274
+  pickupKey: 0
   bobbingSpeed: 2
   bobbingHeight: 0.1
+  playerControllerInput: {fileID: 0}
 --- !u!54 &-6495402956889334087
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -583,3 +586,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &286841642193990013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787467642621636126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 10f19aee19d64dc449acf1e518c42ef9,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2226218544775628155}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnControllerMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c5924710-79b6-48ef-9974-3b7d94d341a1
+    m_ActionName: Game/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Game
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

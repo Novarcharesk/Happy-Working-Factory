@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,9 +28,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInput playerControllerInput;
     private Vector2 controllerMoveDirection;
 
+    public InputControl playerInputControl;
+    private int playerInputIndex;
+
     private void Start()
     {
         originalPosition = transform.localPosition;
+        
+        if (gameObject.CompareTag("Player1"))
+        {
+            playerInputIndex = 2;
+        }
+        if (gameObject.CompareTag("Player2"))
+        {
+            playerInputIndex = 2;
+        }
+
+        playerInputControl = InputSystem.devices[playerInputIndex].device;
+        Debug.Log(playerInputControl.name);
     }
 
     private void Update()
@@ -43,18 +60,22 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(forwardKey))
             {
                 movementDirection += Vector3.forward;
+                transform.rotation = Quaternion.Euler(0,0,0);
             }
             if (Input.GetKey(backKey))
             {
                 movementDirection += Vector3.back;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             if (Input.GetKey(leftKey))
             {
                 movementDirection += Vector3.left;
+                transform.rotation = Quaternion.Euler(0, 270, 0);
             }
             if (Input.GetKey(rightKey))
             {
                 movementDirection += Vector3.right;
+                transform.rotation = Quaternion.Euler(0, 90, 0);
             }
 
             // Normalize the movement direction to ensure consistent speed in all directions
@@ -113,6 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void ControllerMove()
     {
+        isMoving = true;
         transform.position += new Vector3(controllerMoveDirection.x, 0, controllerMoveDirection.y) * Time.deltaTime * movementSpeed;
     }
 
