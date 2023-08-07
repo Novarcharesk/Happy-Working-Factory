@@ -44,8 +44,10 @@ public class PlayerController : MonoBehaviour
             playerInputIndex = 2;
         }
 
-        playerInputControl = InputSystem.devices[playerInputIndex].device;
-        Debug.Log(playerInputControl.name);
+        if (Gamepad.all.Count <= playerInputIndex)
+            return;
+        
+        //Gamepad = gamp
     }
 
     private void Update()

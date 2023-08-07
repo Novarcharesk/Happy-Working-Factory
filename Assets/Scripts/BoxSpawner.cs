@@ -30,10 +30,6 @@ public class BoxSpawner : MonoBehaviour
         BoxMovement boxMovement = newBox.GetComponent<BoxMovement>();
         if (boxMovement != null)
             boxMovement.designatedSpot = designatedSpot;
-
-        // Set the box as delivered and specify which player's box it is (for scorekeeping)
-        bool isPlayer1Box = Random.value < 0.5f; // Randomly decide which player's box it is
-        boxMovement.SetBoxAsDelivered(isPlayer1Box);
     }
 
     public void BoxDelivered()

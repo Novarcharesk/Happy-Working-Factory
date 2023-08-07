@@ -6,6 +6,13 @@ public class BurnerHazard : MonoBehaviour
     public float burnDuration = 2f; // Duration in seconds for which the box is burned
     public int damageAmount = 1; // Amount of damage the burner inflicts on the box (optional)
 
+    [SerializeField] ParticleSystem fireJetParticles;
+
+    private void Start()
+    {
+        fireJetParticles.Stop();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if the collided object is the box (you may need to adjust the tag name based on your box setup)
@@ -13,6 +20,8 @@ public class BurnerHazard : MonoBehaviour
         {
             // Start burning the box
             BurnBox(other.gameObject);
+
+            fireJetParticles.Play();
         }
     }
 
@@ -42,5 +51,7 @@ public class BurnerHazard : MonoBehaviour
         {
             boxHealth.TakeDamage(damageAmount);
         }
+
+        fireJetParticles.Stop();
     }
 }
