@@ -31,6 +31,8 @@ public class BoxHandler : MonoBehaviour
             // Updates the colour of the box to m,atch the player colour
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
         }
+        
+        monorailController = FindObjectOfType<MonorailController>().GetComponent<MonorailController>();
     }
 
     // Checks to see if there has been a collision

@@ -3924,7 +3924,8 @@ MonoBehaviour:
   pickupKey: 32
   bobbingSpeed: 50
   bobbingHeight: 0.1
-  playerControllerInput: {fileID: 861415529}
+  playerControllerInput: {fileID: 0}
+  playerInputIndex: 0
 --- !u!65 &861415527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3954,53 +3955,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &861415529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861415524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 10f19aee19d64dc449acf1e518c42ef9,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 861415525}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnControllerMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c5924710-79b6-48ef-9974-3b7d94d341a1
-    m_ActionName: Game/Move[/XInputControllerWindows/leftStick]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Game
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!4 &879697492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3234848377681267007, guid: 64dd8c315f5addb4c8aab69017f7965b,
@@ -5699,7 +5653,7 @@ PrefabInstance:
     - target: {fileID: 7391759710560627868, guid: 23fb749e03c39a14caf9a27246984cca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.6077175
+      value: 4.03
       objectReference: {fileID: 0}
     - target: {fileID: 7391759710560627868, guid: 23fb749e03c39a14caf9a27246984cca,
         type: 3}
@@ -6203,7 +6157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195057790}
   m_LocalRotation: {x: 0.39376834, y: -0, z: -0, w: 0.9192097}
-  m_LocalPosition: {x: 7.25, y: 26.19, z: -38.66}
+  m_LocalPosition: {x: 7.25, y: 25.86, z: -40.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6893,7 +6847,8 @@ MonoBehaviour:
   pickupKey: 32
   bobbingSpeed: 50
   bobbingHeight: 0.1
-  playerControllerInput: {fileID: 1351432695}
+  playerControllerInput: {fileID: 0}
+  playerInputIndex: 0
 --- !u!65 &1351432693
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6923,7 +6878,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1351432695
+--- !u!114 &1351432697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6937,7 +6892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 10f19aee19d64dc449acf1e518c42ef9,
     type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -6948,23 +6903,7 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1351432691}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnControllerMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c5924710-79b6-48ef-9974-3b7d94d341a1
-    m_ActionName: Game/Move[/XInputControllerWindows/leftStick]
+  m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game
@@ -7885,7 +7824,7 @@ PrefabInstance:
     - target: {fileID: 6653691731668409315, guid: f31305e6c66437044a6d33bbd4c67237,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.87
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: 6653691731668409315, guid: f31305e6c66437044a6d33bbd4c67237,
         type: 3}

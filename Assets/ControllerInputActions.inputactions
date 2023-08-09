@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "c5924710-79b6-48ef-9974-3b7d94d341a1",
                     "expectedControlType": "Stick",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -21,7 +21,7 @@
                     "id": "d31d25b5-7dc2-4974-8e74-70a156f3ffc0",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,

@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,37 +19,35 @@ public class PlayerController : MonoBehaviour
     private Vector3 originalPosition;
     private bool isMoving = false;
     private GameObject heldBox; // Reference to the currently held box, if any
+    private Vector3 movementDirection;
 
     [Header("Controller Settings")]
     [SerializeField] private PlayerInput playerControllerInput;
     private Vector2 controllerMoveDirection;
+    private Gamepad playerGamepad;
 
     public InputControl playerInputControl;
-    private int playerInputIndex;
+    [SerializeField] private int playerInputIndex;
 
     private void Start()
     {
         originalPosition = transform.localPosition;
-        
+
         if (gameObject.CompareTag("Player1"))
         {
-            playerInputIndex = 2;
+            playerInputIndex = 1;
         }
         if (gameObject.CompareTag("Player2"))
         {
             playerInputIndex = 2;
         }
 
-        if (Gamepad.all.Count <= playerInputIndex)
-            return;
-        
-        //Gamepad = gamp
     }
 
     private void Update()
     {
         // Input handling for movement
-        Vector3 movementDirection = Vector3.zero;
+        movementDirection = Vector3.zero;
 
         if (Input.GetKey(forwardKey) || Input.GetKey(backKey) || Input.GetKey(leftKey) || Input.GetKey(rightKey))
         {
@@ -83,6 +77,7 @@ public class PlayerController : MonoBehaviour
             // Normalize the movement direction to ensure consistent speed in all directions
             movementDirection.Normalize();
             transform.position += movementDirection * Time.deltaTime * movementSpeed;
+            Debug.Log(movementDirection);
         }
         else
         {
@@ -122,23 +117,52 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("Box picked up or dropped!");
         }
+    }
 
-        if (controllerMoveDirection != new Vector2(0f,0f))
+    private void OnMove(InputValue moveDirection)
+    {
+        Debug.Log(moveDirection.Get<Vector2>().normalized);
+        Debug.Log(movementDirection);
+
+        Vector2 controllerMove = moveDirection.Get<Vector2>().normalized;
+        
+        movementDirection = Vector3.zero;
+        if (controllerMove != Vector2.zero) 
         {
-            isMoving = true;
-            ControllerMove();
+            if (moveDirection.Get<Vector2>().y >= 0)
+            {
+                movementDirection += Vector3.forward;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (moveDirection.Get<Vector2>().y <= 0)
+            {
+                movementDirection += Vector3.back;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            if (moveDirection.Get<Vector2>().x <= 0)
+            {
+                movementDirection += Vector3.left;
+                transform.rotation = Quaternion.Euler(0, 270, 0);
+            }
+            if (moveDirection.Get<Vector2>().x >= 0)
+            {
+                movementDirection += Vector3.right;
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
         }
         else
         {
             isMoving = false;
         }
-    }
 
-    private void ControllerMove()
-    {
-        isMoving = true;
-        transform.position += new Vector3(controllerMoveDirection.x, 0, controllerMoveDirection.y) * Time.deltaTime * movementSpeed;
-    }
+        // Bobbing motion only when moving
+        if (isMoving)
+        {
+            float newY = originalPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
+            transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
+        }
 
-    public void OnControllerMove(InputAction.CallbackContext ctx) => controllerMoveDirection = ctx.ReadValue<Vector2>();
+        movementDirection.Normalize();
+        transform.position += movementDirection * Time.deltaTime * movementSpeed;
+    }
 }

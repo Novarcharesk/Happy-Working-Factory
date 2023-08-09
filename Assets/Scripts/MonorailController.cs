@@ -49,7 +49,7 @@ public class MonorailController : MonoBehaviour
         Debug.Log("placing box on monorail");
         
         // Spawns the box on the train
-        GameObject monorailNewBox = Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity, this.boxStorageCollider.transform);
+        GameObject monorailNewBox =  Instantiate(boxPrefab, boxStorageCollider.transform.position, Quaternion.identity, this.boxStorageCollider.transform);
         
         // Checking who touched the box last and changing the boxs colour
         if (lastTouchedBy == "Player1")
@@ -102,7 +102,9 @@ public class MonorailController : MonoBehaviour
                 UpdateScore();
 
                 StopAllCoroutines();
+                Destroy(monorailNewBox);
                 Destroy(gameObject);
+                Destroy(this);
             }
             yield return null;
         }

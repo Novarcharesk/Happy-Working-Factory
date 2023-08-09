@@ -36,6 +36,6 @@ public class MonorailSpawner : MonoBehaviour
     private void SpawnMonorail()
     {
         monorailPresent = true;
-        spawnedMonorail = Instantiate(monorailPrefab, new Vector3(leftMonorailBoundary.transform.position.x -10, 0, -11.5f), Quaternion.identity);
+        spawnedMonorail = Instantiate(monorailPrefab, new Vector3(leftMonorailBoundary.transform.position.x -10, 0, -11.5f), Quaternion.identity, this.transform);
     }
 }
