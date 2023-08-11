@@ -1,17 +1,20 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Speed")]
+    [Header("Character Settings")]
     [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] public float kickForce = 2f;
 
     [Header("Controls")]
     [SerializeField] private KeyCode forwardKey;
     [SerializeField] private KeyCode rightKey;
     [SerializeField] private KeyCode leftKey;
     [SerializeField] private KeyCode backKey;
-    [SerializeField] private KeyCode pickupKey; // New key to pick up and drop the box
+    [SerializeField] public KeyCode kickKey;
 
     [Header("Bobbing")]
     [SerializeField] private float bobbingSpeed = 2f;
@@ -35,11 +38,11 @@ public class PlayerController : MonoBehaviour
 
         if (gameObject.CompareTag("Player1"))
         {
-            playerInputIndex = 1;
+            playerInputIndex = 0;
         }
         if (gameObject.CompareTag("Player2"))
         {
-            playerInputIndex = 2;
+            playerInputIndex = 1;
         }
 
     }
@@ -77,77 +80,46 @@ public class PlayerController : MonoBehaviour
             // Normalize the movement direction to ensure consistent speed in all directions
             movementDirection.Normalize();
             transform.position += movementDirection * Time.deltaTime * movementSpeed;
-            Debug.Log(movementDirection);
         }
         else
         {
             isMoving = false;
         }
 
-        // Bobbing motion only when moving
-        if (isMoving)
+        var gamepad = Gamepad.all[playerInputIndex];
+        if (gamepad == null)
+            return; // No gamepad connected.
+
+        if (gamepad.rightTrigger.wasPressedThisFrame)
         {
-            float newY = originalPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
-            transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
+            // 'Use' code here
+            Debug.Log("Kick");
         }
 
-        // Handle box pickup
-        if (Input.GetKeyDown(pickupKey))
+        if (gamepad.leftStick.IsActuated())
         {
-            if (heldBox == null)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.forward, out hit, 3f))
-                {
-                    if (hit.collider.CompareTag("Box"))
-                    {
-                        Debug.Log("Box hit by raycast!");
-                        heldBox = hit.collider.gameObject;
-                        heldBox.GetComponent<Rigidbody>().isKinematic = true;
-                        heldBox.transform.SetParent(transform);
-                        heldBox.transform.localPosition = Vector3.forward * 1.5f;
-                    }
-                }
-            }
-            else
-            {
-                heldBox.GetComponent<Rigidbody>().isKinematic = false;
-                heldBox.transform.SetParent(null);
-                heldBox = null;
-            }
-            Debug.Log("Box picked up or dropped!");
-        }
-    }
+            isMoving = true;
+            Vector2 controllerMove = gamepad.leftStick.ReadValue();
+            transform.position += new Vector3(controllerMove.x, 0, controllerMove.y) * Time.deltaTime * movementSpeed;
 
-    private void OnMove(InputValue moveDirection)
-    {
-        Debug.Log(moveDirection.Get<Vector2>().normalized);
-        Debug.Log(movementDirection);
+            Debug.Log(gamepad.leftStick.ReadValue().x);
+            Debug.Log(gamepad.leftStick.ReadValue().y);
 
-        Vector2 controllerMove = moveDirection.Get<Vector2>().normalized;
-        
-        movementDirection = Vector3.zero;
-        if (controllerMove != Vector2.zero) 
-        {
-            if (moveDirection.Get<Vector2>().y >= 0)
+            if (gamepad.leftStick.ReadValue().x <= 0)
             {
-                movementDirection += Vector3.forward;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            if (moveDirection.Get<Vector2>().y <= 0)
-            {
-                movementDirection += Vector3.back;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            if (moveDirection.Get<Vector2>().x <= 0)
-            {
-                movementDirection += Vector3.left;
                 transform.rotation = Quaternion.Euler(0, 270, 0);
             }
-            if (moveDirection.Get<Vector2>().x >= 0)
+            if (gamepad.leftStick.ReadValue().x >= 0)
             {
-                movementDirection += Vector3.right;
                 transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            if (gamepad.leftStick.ReadValue().y <= 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            if (gamepad.leftStick.ReadValue().y >= 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
         else
@@ -161,8 +133,5 @@ public class PlayerController : MonoBehaviour
             float newY = originalPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
             transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
         }
-
-        movementDirection.Normalize();
-        transform.position += movementDirection * Time.deltaTime * movementSpeed;
     }
 }
