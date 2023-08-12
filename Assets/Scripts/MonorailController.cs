@@ -75,7 +75,7 @@ public class MonorailController : MonoBehaviour
         {
             if (transform.position.x <= -0.5)
             {
-                transform.Translate(+0.01f, 0, 0);
+                transform.Translate(+0.025f, 0, 0);
             }
             else
             {
@@ -92,7 +92,7 @@ public class MonorailController : MonoBehaviour
         {
             if (transform.position.x <= 26f)
             {
-                transform.Translate(+0.00005f, 0, 0);
+                transform.Translate(+0.000075f, 0, 0);
             }
             else
             {
