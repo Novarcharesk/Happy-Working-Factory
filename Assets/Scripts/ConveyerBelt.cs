@@ -16,6 +16,7 @@ public class ConveyerBelt : MonoBehaviour
 
             // Move the box along with the conveyor belt's surface velocity
             rb.velocity = conveyerVelocity;
+            other.GetComponent<AudioSource>().enabled = false;
         }
     }
 
@@ -29,6 +30,7 @@ public class ConveyerBelt : MonoBehaviour
 
             // Detach the box from the conveyor belt's parent to let it fall naturally
             other.transform.SetParent(null);
+            other.GetComponent<AudioSource>().enabled = true;
         }
     }
 }

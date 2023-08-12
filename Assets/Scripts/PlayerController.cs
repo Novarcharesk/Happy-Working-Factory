@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,13 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float bobbingHeight = 0.1f;
     private Vector3 originalPosition;
     private bool isMoving = false;
-    private GameObject heldBox; // Reference to the currently held box, if any
     private Vector3 movementDirection;
 
     [Header("Controller Settings")]
     [SerializeField] private PlayerInput playerControllerInput;
-    private Vector2 controllerMoveDirection;
-    private Gamepad playerGamepad;
+    public Gamepad playerGamepad;
 
     public InputControl playerInputControl;
     [SerializeField] private int playerInputIndex;
@@ -44,7 +41,7 @@ public class PlayerController : MonoBehaviour
         {
             playerInputIndex = 1;
         }
-
+        Debug.Log(playerInputIndex);
     }
 
     private void Update()
@@ -86,52 +83,62 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
         }
 
-        var gamepad = Gamepad.all[playerInputIndex];
-        if (gamepad == null)
-            return; // No gamepad connected.
-
-        if (gamepad.rightTrigger.wasPressedThisFrame)
-        {
-            // 'Use' code here
-            Debug.Log("Kick");
-        }
-
-        if (gamepad.leftStick.IsActuated())
-        {
-            isMoving = true;
-            Vector2 controllerMove = gamepad.leftStick.ReadValue();
-            transform.position += new Vector3(controllerMove.x, 0, controllerMove.y) * Time.deltaTime * movementSpeed;
-
-            Debug.Log(gamepad.leftStick.ReadValue().x);
-            Debug.Log(gamepad.leftStick.ReadValue().y);
-
-            if (gamepad.leftStick.ReadValue().x <= 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 270, 0);
-            }
-            if (gamepad.leftStick.ReadValue().x >= 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 90, 0);
-            }
-            if (gamepad.leftStick.ReadValue().y <= 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            if (gamepad.leftStick.ReadValue().y >= 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-        }
-        else
-        {
-            isMoving = false;
-        }
-
         // Bobbing motion only when moving
         if (isMoving)
         {
             float newY = originalPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
             transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
         }
+
+        if (Gamepad.all.Count != 0)
+        {
+            playerGamepad = Gamepad.all[playerInputIndex];
+            if (playerGamepad == null)
+                return;
+
+            if (playerGamepad.rightTrigger.wasPressedThisFrame)
+            {
+                // 'Use' code here
+                Debug.Log("Kick");
+            }
+
+            if (playerGamepad.leftStick.IsActuated())
+            {
+                isMoving = true;
+                Vector2 controllerMove = playerGamepad.leftStick.ReadValue();
+                transform.position += new Vector3(controllerMove.x, 0, controllerMove.y) * Time.deltaTime * movementSpeed;
+
+                Debug.Log(playerGamepad.leftStick.ReadValue().x);
+                Debug.Log(playerGamepad.leftStick.ReadValue().y);
+
+                if (playerGamepad.leftStick.ReadValue().x <= 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 270, 0);
+                }
+                if (playerGamepad.leftStick.ReadValue().x >= 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 90, 0);
+                }
+                if (playerGamepad.leftStick.ReadValue().y <= 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                if (playerGamepad.leftStick.ReadValue().y >= 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+            }
+            else
+            {
+                isMoving = false;
+            }
+
+            // Bobbing motion only when moving
+            if (isMoving)
+            {
+                float newY = originalPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
+                transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
+            }
+        }   
     }
 }

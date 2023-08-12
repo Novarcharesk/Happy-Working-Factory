@@ -7,10 +7,12 @@ public class BurnerHazard : MonoBehaviour
     public int damageAmount = 1; // Amount of damage the burner inflicts on the box (optional)
 
     [SerializeField] ParticleSystem fireJetParticles;
+    [SerializeField] private AudioSource sfxSource;
 
     private void Start()
     {
         fireJetParticles.Stop();
+        sfxSource.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +24,7 @@ public class BurnerHazard : MonoBehaviour
             BurnBox(other.gameObject);
 
             fireJetParticles.Play();
+            sfxSource.Play();
         }
     }
 

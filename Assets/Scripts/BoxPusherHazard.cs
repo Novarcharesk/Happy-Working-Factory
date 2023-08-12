@@ -8,6 +8,8 @@ public class BoxPusherHazard : MonoBehaviour
 
     [SerializeField] private Animation pistonActivated;
 
+    [SerializeField] private AudioSource sfxSource;
+
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
@@ -17,6 +19,7 @@ public class BoxPusherHazard : MonoBehaviour
             Vector3 direction = transform.up;
             rb.AddForce(direction * pushForce, ForceMode.Impulse);
             pistonActivated.Play("BoxPusherHazardActivated");
+            sfxSource.Play();
         }
     }
 }

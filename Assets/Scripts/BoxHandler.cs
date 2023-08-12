@@ -7,12 +7,16 @@ public class BoxHandler : MonoBehaviour
 {
     private MonorailController monorailController;
 
+    [SerializeField] private AudioSource sfxSource;
+    private Rigidbody boxRb;
+
     // String variable needed to tell who last touched the box
     private string lastTouch;
 
     private void Start()
     {
         monorailController = FindObjectOfType<MonorailController>().GetComponent<MonorailController>();
+        boxRb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     // Runs every frame
@@ -42,11 +46,13 @@ public class BoxHandler : MonoBehaviour
         if (collision.collider.CompareTag("Player1"))
         {
             lastTouch = "Player1";
+            sfxSource.PlayOneShot(sfxSource.clip);
         }
         
         if (collision.collider.CompareTag("Player2"))
         {
             lastTouch = "Player2";
+            sfxSource.PlayOneShot(sfxSource.clip);
         }
     }
 

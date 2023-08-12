@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterKick : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class CharacterKick : MonoBehaviour
     private float kickForce;
     private bool canKick;
     private float kickCooldown;
+    private Gamepad playerGamepad;
 
     private void Start()
     {
         kickKey = this.GetComponentInParent<PlayerController>().kickKey;
         kickForce = this.GetComponentInParent<PlayerController>().kickForce;
+        playerGamepad = this.GetComponentInParent<PlayerController>().playerGamepad;
     }
 
     private void Update()
@@ -29,7 +32,7 @@ public class CharacterKick : MonoBehaviour
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
 
-        if (rb != null && Input.GetKey(kickKey) && canKick == true)
+        if (rb != null && (Input.GetKey(kickKey) || playerGamepad.rightTrigger.isPressed) && canKick == true)
         {
             Vector3 direction = transform.forward;
             rb.AddForce(direction * kickForce, ForceMode.Impulse);
