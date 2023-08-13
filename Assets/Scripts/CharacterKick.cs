@@ -32,12 +32,29 @@ public class CharacterKick : MonoBehaviour
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
 
-        if (rb != null && (Input.GetKey(kickKey) || playerGamepad.rightTrigger.isPressed) && canKick == true)
+        if (rb != null)
+        {
+            KickObjects(rb);
+        }
+    }
+
+    private void KickObjects(Rigidbody rb)
+    {
+        if (Input.GetKey(kickKey) && canKick == true)
         {
             Vector3 direction = transform.forward;
             rb.AddForce(direction * kickForce, ForceMode.Impulse);
             canKick = false;
             kickCooldown = 0;
         }
+
+        if (playerGamepad != null && playerGamepad.rightTrigger.isPressed && canKick == true)
+        {
+            Vector3 direction = transform.forward;
+            rb.AddForce(direction * kickForce, ForceMode.Impulse);
+            canKick = false;
+            kickCooldown = 0;
+        }
+
     }
 }
