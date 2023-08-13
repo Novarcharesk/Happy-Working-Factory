@@ -291,6 +291,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: cedc416ac313baf49ab8263cfafba9df,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06de736b33468af47bb2bcd37e3473f2, type: 2}
     - target: {fileID: 919132149155446097, guid: cedc416ac313baf49ab8263cfafba9df,
         type: 3}
       propertyPath: m_Name
@@ -366,6 +371,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 14412ae6cabefff45a988e2a0c30ee70,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06de736b33468af47bb2bcd37e3473f2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 14412ae6cabefff45a988e2a0c30ee70,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 06de736b33468af47bb2bcd37e3473f2, type: 2}
     - target: {fileID: 919132149155446097, guid: 14412ae6cabefff45a988e2a0c30ee70,
         type: 3}
       propertyPath: m_Name
