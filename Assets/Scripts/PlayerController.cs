@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Character Settings")]
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] public float kickForce = 2f;
+    
+    private Rigidbody characterRB;
+    public bool isSliding;
 
     [Header("Controls")]
     [SerializeField] private KeyCode forwardKey;
@@ -32,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         originalPosition = transform.localPosition;
+        characterRB = GetComponent<Rigidbody>();
 
         if (gameObject.CompareTag("Player1"))
         {
@@ -46,41 +51,40 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Input handling for movement
-        movementDirection = Vector3.zero;
-
         if (Input.GetKey(forwardKey) || Input.GetKey(backKey) || Input.GetKey(leftKey) || Input.GetKey(rightKey))
         {
             isMoving = true;
+            characterRB.velocity = Vector3.zero;
+
             // Handling the movement input
             if (Input.GetKey(forwardKey))
             {
-                movementDirection += Vector3.forward;
                 transform.rotation = Quaternion.Euler(0,0,0);
+                characterRB.velocity = Vector3.forward * movementSpeed;
             }
             if (Input.GetKey(backKey))
             {
-                movementDirection += Vector3.back;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
+                characterRB.velocity = Vector3.back * movementSpeed;
             }
             if (Input.GetKey(leftKey))
             {
-                movementDirection += Vector3.left;
                 transform.rotation = Quaternion.Euler(0, 270, 0);
+                characterRB.velocity = Vector3.left * movementSpeed;
             }
             if (Input.GetKey(rightKey))
             {
-                movementDirection += Vector3.right;
                 transform.rotation = Quaternion.Euler(0, 90, 0);
+                characterRB.velocity = Vector3.right * movementSpeed;
             }
-
-            // Normalize the movement direction to ensure consistent speed in all directions
-            movementDirection.Normalize();
-            transform.position += movementDirection * Time.deltaTime * movementSpeed;
         }
         else
         {
             isMoving = false;
+            if (!isSliding)
+            {
+                characterRB.velocity = Vector3.zero;
+            }
         }
 
         // Bobbing motion only when moving
@@ -106,7 +110,9 @@ public class PlayerController : MonoBehaviour
             {
                 isMoving = true;
                 Vector2 controllerMove = playerGamepad.leftStick.ReadValue();
-                transform.position += new Vector3(controllerMove.x, 0, controllerMove.y) * Time.deltaTime * movementSpeed;
+                //transform.position += new Vector3(controllerMove.x, 0, controllerMove.y) * Time.deltaTime * movementSpeed;
+
+                characterRB.velocity = new Vector3(controllerMove.x, 0, controllerMove.y) * movementSpeed;
 
                 Debug.Log(playerGamepad.leftStick.ReadValue().x);
                 Debug.Log(playerGamepad.leftStick.ReadValue().y);

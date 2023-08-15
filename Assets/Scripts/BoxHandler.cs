@@ -11,7 +11,7 @@ public class BoxHandler : MonoBehaviour
     private Rigidbody boxRb;
 
     // String variable needed to tell who last touched the box
-    private string lastTouch;
+    public string lastTouch;
 
     private void Start()
     {
@@ -70,5 +70,10 @@ public class BoxHandler : MonoBehaviour
             Debug.Log("monorail collision");
             OnMonorailCollision(gameObject);
         }
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(this.gameObject);
     }
 }
