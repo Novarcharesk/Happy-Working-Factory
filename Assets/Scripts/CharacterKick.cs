@@ -11,20 +11,30 @@ public class CharacterKick : MonoBehaviour
     private float kickCooldown;
     private Gamepad playerGamepad;
 
+    private Animation kickAnimation;
+    [SerializeField] private AudioSource sfxSource;
+
     private void Start()
     {
         kickKey = this.GetComponentInParent<PlayerController>().kickKey;
         kickForce = this.GetComponentInParent<PlayerController>().kickForce;
         playerGamepad = this.GetComponentInParent<PlayerController>().playerGamepad;
+
+        kickAnimation = this.gameObject.GetComponentInParent<Animation>();
     }
 
     private void Update()
     {
-        kickCooldown += Time.deltaTime;
-
-        if (kickCooldown >= 5f)
+        if (Input.GetKey(kickKey))
         {
-            canKick = true;
+            kickAnimation.Play("Kick");
+            sfxSource.Play();
+        }
+
+        if (playerGamepad != null && playerGamepad.rightTrigger.isPressed)
+        {
+            kickAnimation.Play("Kick");
+            sfxSource.Play();
         }
     }
 
@@ -32,12 +42,47 @@ public class CharacterKick : MonoBehaviour
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
 
-        if (rb != null && (Input.GetKey(kickKey) || playerGamepad.rightTrigger.isPressed) && canKick == true)
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Box"))
         {
-            Vector3 direction = transform.forward;
-            rb.AddForce(direction * kickForce, ForceMode.Impulse);
-            canKick = false;
-            kickCooldown = 0;
+            if (Input.GetKey(kickKey))
+            {
+                if (other.CompareTag("Box"))
+                {
+                    ChangeBoxColour(other.gameObject);
+                }
+
+                Vector3 direction = transform.forward;
+                rb.AddForce(direction * kickForce, ForceMode.Impulse);
+                kickAnimation.Play("Kick");
+                sfxSource.Play();
+
+
+            }
+
+            if (playerGamepad != null && playerGamepad.rightTrigger.isPressed)
+            {
+                Vector3 direction = transform.forward;
+                rb.AddForce(direction * kickForce, ForceMode.Impulse);
+                kickAnimation.Play("Kick");
+                sfxSource.Play();
+
+                if (other.CompareTag("Box"))
+                {
+                    ChangeBoxColour(other.gameObject);
+                }
+            }
+        }
+    }
+
+    private void ChangeBoxColour(GameObject box)
+    {
+        if (this.gameObject.CompareTag("Player1"))
+        {
+            box.GetComponent<BoxHandler>().lastTouch = "Player1";
+        }
+        if (this.gameObject.CompareTag("Player2"))
+        {
+            box.GetComponent<BoxHandler>().lastTouch = "Player2";
         }
     }
 }

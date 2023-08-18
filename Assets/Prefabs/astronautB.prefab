@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 3499632339766428431}
   - component: {fileID: 3499632339766428416}
   - component: {fileID: 3499632339766428418}
+  - component: {fileID: 919132148290549059}
   m_Layer: 3
   m_Name: astronautB
   m_TagString: Player2
@@ -148,12 +149,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4346071238093348389}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 547fedb9c0b171645906a7b83f465a2c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.488451, y: 0.4870144, z: 0.3674898}
-  m_Center: {x: -0.003742218, y: 0.2564928, z: -0.028754711}
+  m_Size: {x: 0.488451, y: 0.79494935, z: 0.3674898}
+  m_Center: {x: -0.003742218, y: 0.41046026, z: -0.028754711}
 --- !u!114 &3499632339766428418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,16 +168,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 6
-  kickForce: 2
+  kickForce: 10
+  isSliding: 0
   forwardKey: 273
   rightKey: 275
   leftKey: 276
   backKey: 274
-  kickKey: 0
+  kickKey: 256
   bobbingSpeed: 50
   bobbingHeight: 0.1
   playerControllerInput: {fileID: 0}
   playerInputIndex: 0
+--- !u!114 &919132148290549059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4346071238093348389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 10f19aee19d64dc449acf1e518c42ef9,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Game
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6556009637913958363
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +221,8 @@ GameObject:
   - component: {fileID: 5383421011693286054}
   - component: {fileID: 2167990976099284910}
   - component: {fileID: 2044354428143865023}
+  - component: {fileID: 980448198}
+  - component: {fileID: 980448197}
   m_Layer: 3
   m_Name: legRight
   m_TagString: Untagged
@@ -262,6 +297,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &980448198
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556009637913958363}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6070126, y: 0.5972739, z: 1.0183963}
+  m_Center: {x: -0.14556761, y: 0.038636193, z: 0.4208988}
+--- !u!114 &980448197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556009637913958363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b310755967f71942be90b785aa9dd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7755353297531499131
 GameObject:
   m_ObjectHideFlags: 0
