@@ -7,8 +7,6 @@ public class CharacterKick : MonoBehaviour
 {
     private KeyCode kickKey;
     private float kickForce;
-    private bool canKick;
-    private float kickCooldown;
     private Gamepad playerGamepad;
 
     private Animation kickAnimation;

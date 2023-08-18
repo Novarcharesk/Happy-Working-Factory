@@ -12,7 +12,6 @@ public class MonorailController : MonoBehaviour
 
     // Decleration of the variables to check if there is something on the train
     public static bool cargoLoaded = false;
-    private bool waitingToLeave = false;
 
     [SerializeField] private Collider boxStorageCollider;
     [SerializeField] private List<string> cargoList;
@@ -38,7 +37,6 @@ public class MonorailController : MonoBehaviour
         // Checks to see if there is cargo loaded
         if (cargoLoaded)
         {
-            waitingToLeave = true;
             runningRoutine = StartCoroutine("MoveMonorailToEnd");
         }
     }

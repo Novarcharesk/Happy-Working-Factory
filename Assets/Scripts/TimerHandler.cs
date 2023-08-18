@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimerHandler : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class TimerHandler : MonoBehaviour
     private void Start()
     {
         // Sets the time reamining to the max time
-        timeRemaining = maxTime;
+        timeRemaining = LobySettings.matchTimeInSeconds;
 
         // Calls the update timer display method
         UpdateTimerDisplay();
@@ -28,15 +29,14 @@ public class TimerHandler : MonoBehaviour
         {
             // reduced the time remaining by time.deltatime
             timeRemaining -= Time.deltaTime;
+
+            // Calls the update timer display method
+            UpdateTimerDisplay();
         }
         else
         {
-            // Put end timer code in here
-            Debug.Log("timer ended");
+            SceneManager.LoadScene(1);
         }
-
-        // Calls the update timer display method
-        UpdateTimerDisplay();
     }
 
     // Method that updates the timer display
@@ -47,6 +47,6 @@ public class TimerHandler : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeRemaining % 60);
 
         // Updates the UI text element to display the time
-        timerDisplay.text = string.Format("{0:00}:{1:00}", minutes, seconds); ;
+        timerDisplay.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

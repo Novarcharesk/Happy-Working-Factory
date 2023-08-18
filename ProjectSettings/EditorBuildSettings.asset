@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 23e0508db485eef43bf8dfa48d86803c
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/SquareLevel.unity
+    guid: 36fbbd2a14f43714dbfa219df8ddf9fb
+  - enabled: 1
+    path: Assets/Scenes/RaceLevel.unity
+    guid: cd330ce34688b3b41bc63205722ed5b5
+  - enabled: 1
+    path: Assets/Scenes/HLevel.unity
+    guid: 11710712878ac3740800ae109e1298f2
   m_configObjects: {}

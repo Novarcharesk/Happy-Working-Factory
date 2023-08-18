@@ -16,6 +16,7 @@ public class BoxSpawner : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("SpawnObject", 0f, spawnDelay);
+        maxSpawns = LobySettings.maxBoxSpawn;
     }
 
     private void SpawnObject()

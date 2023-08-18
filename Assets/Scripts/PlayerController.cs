@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        kickForce = LobySettings.characterKickForce;
+        
         originalPosition = transform.localPosition;
         characterRB = GetComponent<Rigidbody>();
 
