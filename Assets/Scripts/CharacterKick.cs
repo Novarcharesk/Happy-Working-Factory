@@ -11,6 +11,7 @@ public class CharacterKick : MonoBehaviour
 
     private Animation kickAnimation;
     [SerializeField] private AudioSource sfxSource;
+    private int playerInputIndex;
 
     private void Start()
     {
@@ -19,6 +20,15 @@ public class CharacterKick : MonoBehaviour
         playerGamepad = this.GetComponentInParent<PlayerController>().playerGamepad;
 
         kickAnimation = this.gameObject.GetComponentInParent<Animation>();
+
+        if (gameObject.CompareTag("Player1"))
+        {
+            playerInputIndex = 0;
+        }
+        if (gameObject.CompareTag("Player2"))
+        {
+            playerInputIndex = 1;
+        }
     }
 
     private void Update()
@@ -29,11 +39,15 @@ public class CharacterKick : MonoBehaviour
             sfxSource.Play();
         }
 
-        if (playerGamepad != null && playerGamepad.rightTrigger.isPressed)
+        if (playerGamepad != null && playerGamepad.rightTrigger.wasPressedThisFrame)
         {
             kickAnimation.Play("Kick");
             sfxSource.Play();
         }
+
+        playerGamepad = Gamepad.all[playerInputIndex];
+        if (playerGamepad == null)
+            return;
     }
 
     private void OnTriggerStay(Collider other)
@@ -53,21 +67,19 @@ public class CharacterKick : MonoBehaviour
                 rb.AddForce(direction * kickForce, ForceMode.Impulse);
                 kickAnimation.Play("Kick");
                 sfxSource.Play();
-
-
             }
 
-            if (playerGamepad != null && playerGamepad.rightTrigger.isPressed)
+            if (playerGamepad != null && playerGamepad.rightTrigger.wasPressedThisFrame)
             {
-                Vector3 direction = transform.forward;
-                rb.AddForce(direction * kickForce, ForceMode.Impulse);
-                kickAnimation.Play("Kick");
-                sfxSource.Play();
-
                 if (other.CompareTag("Box"))
                 {
                     ChangeBoxColour(other.gameObject);
                 }
+
+                Vector3 direction = transform.forward;
+                rb.AddForce(direction * kickForce, ForceMode.Impulse);
+                kickAnimation.Play("Kick");
+                sfxSource.Play();
             }
         }
     }

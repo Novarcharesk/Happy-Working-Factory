@@ -1,3 +1,4 @@
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -48,7 +49,6 @@ public class PlayerController : MonoBehaviour
         {
             playerInputIndex = 1;
         }
-        Debug.Log(playerInputIndex);
     }
 
     private void Update()
@@ -58,27 +58,9 @@ public class PlayerController : MonoBehaviour
             isMoving = true;
             characterRB.velocity = Vector3.zero;
 
-            // Handling the movement input
-            if (Input.GetKey(forwardKey))
-            {
-                transform.rotation = Quaternion.Euler(0,0,0);
-                characterRB.velocity = Vector3.forward * movementSpeed;
-            }
-            if (Input.GetKey(backKey))
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                characterRB.velocity = Vector3.back * movementSpeed;
-            }
-            if (Input.GetKey(leftKey))
-            {
-                transform.rotation = Quaternion.Euler(0, 270, 0);
-                characterRB.velocity = Vector3.left * movementSpeed;
-            }
-            if (Input.GetKey(rightKey))
-            {
-                transform.rotation = Quaternion.Euler(0, 90, 0);
-                characterRB.velocity = Vector3.right * movementSpeed;
-            }
+            characterRB.velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * movementSpeed;
+            Quaternion toRotation = Quaternion.LookRotation(characterRB.velocity, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, movementSpeed);
         }
         else
         {
@@ -104,37 +86,21 @@ public class PlayerController : MonoBehaviour
 
             if (playerGamepad.rightTrigger.wasPressedThisFrame)
             {
-                // 'Use' code here
-                Debug.Log("Kick");
+                //GetComponentInChildren<CharacterKick>().KickAnimation();
             }
 
             if (playerGamepad.leftStick.IsActuated())
             {
                 isMoving = true;
                 Vector2 controllerMove = playerGamepad.leftStick.ReadValue();
-                //transform.position += new Vector3(controllerMove.x, 0, controllerMove.y) * Time.deltaTime * movementSpeed;
 
                 characterRB.velocity = new Vector3(controllerMove.x, 0, controllerMove.y) * movementSpeed;
 
                 Debug.Log(playerGamepad.leftStick.ReadValue().x);
                 Debug.Log(playerGamepad.leftStick.ReadValue().y);
 
-                if (playerGamepad.leftStick.ReadValue().x <= 0)
-                {
-                    transform.rotation = Quaternion.Euler(0, 270, 0);
-                }
-                if (playerGamepad.leftStick.ReadValue().x >= 0)
-                {
-                    transform.rotation = Quaternion.Euler(0, 90, 0);
-                }
-                if (playerGamepad.leftStick.ReadValue().y <= 0)
-                {
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-                }
-                if (playerGamepad.leftStick.ReadValue().y >= 0)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                }
+                Quaternion toRotation = Quaternion.LookRotation(characterRB.velocity, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, movementSpeed);
             }
             else
             {
