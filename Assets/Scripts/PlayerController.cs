@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Character Settings")]
     [SerializeField] private float movementSpeed = 10f;
-    [SerializeField] public float kickForce = 2f;
+    [SerializeField] public float kickForce;
     
     private Rigidbody characterRB;
     public bool isSliding;
@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        kickForce = LobySettings.characterKickForce;
+
         if (Input.GetKey(forwardKey) || Input.GetKey(backKey) || Input.GetKey(leftKey) || Input.GetKey(rightKey))
         {
             isMoving = true;
@@ -86,7 +88,11 @@ public class PlayerController : MonoBehaviour
 
             if (playerGamepad.rightTrigger.wasPressedThisFrame)
             {
-                //GetComponentInChildren<CharacterKick>().KickAnimation();
+                gameObject.GetComponentInChildren<CharacterKick>().rightTriggerPressed = true;
+            }
+            else
+            {
+                gameObject.GetComponentInChildren<CharacterKick>().rightTriggerPressed = false;
             }
 
             if (playerGamepad.leftStick.IsActuated())

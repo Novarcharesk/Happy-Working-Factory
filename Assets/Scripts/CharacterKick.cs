@@ -7,79 +7,61 @@ public class CharacterKick : MonoBehaviour
 {
     private KeyCode kickKey;
     private float kickForce;
-    private Gamepad playerGamepad;
 
     private Animation kickAnimation;
     [SerializeField] private AudioSource sfxSource;
-    private int playerInputIndex;
+    public bool rightTriggerPressed;
 
     private void Start()
     {
         kickKey = this.GetComponentInParent<PlayerController>().kickKey;
         kickForce = this.GetComponentInParent<PlayerController>().kickForce;
-        playerGamepad = this.GetComponentInParent<PlayerController>().playerGamepad;
 
         kickAnimation = this.gameObject.GetComponentInParent<Animation>();
-
-        if (gameObject.CompareTag("Player1"))
-        {
-            playerInputIndex = 0;
-        }
-        if (gameObject.CompareTag("Player2"))
-        {
-            playerInputIndex = 1;
-        }
     }
 
     private void Update()
     {
+        kickForce = this.GetComponentInParent<PlayerController>().kickForce;
+
         if (Input.GetKey(kickKey))
         {
             kickAnimation.Play("Kick");
             sfxSource.Play();
         }
 
-        if (playerGamepad != null && playerGamepad.rightTrigger.wasPressedThisFrame)
+        if (rightTriggerPressed == true)
         {
             kickAnimation.Play("Kick");
             sfxSource.Play();
         }
-
-        playerGamepad = Gamepad.all[playerInputIndex];
-        if (playerGamepad == null)
-            return;
     }
 
     private void OnTriggerStay(Collider other)
-    {
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-
+    { 
         if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Box"))
         {
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+
             if (Input.GetKey(kickKey))
             {
-                if (other.CompareTag("Box"))
-                {
-                    ChangeBoxColour(other.gameObject);
-                }
-
                 Vector3 direction = transform.forward;
                 rb.AddForce(direction * kickForce, ForceMode.Impulse);
                 kickAnimation.Play("Kick");
                 sfxSource.Play();
+
+                ChangeBoxColour(other.gameObject);
             }
 
-            if (playerGamepad != null && playerGamepad.rightTrigger.wasPressedThisFrame)
+            if (rightTriggerPressed == true)
             {
-                if (other.CompareTag("Box"))
-                {
-                    ChangeBoxColour(other.gameObject);
-                }
-
+                Debug.Log("Gamepad Kick");
                 Vector3 direction = transform.forward;
                 rb.AddForce(direction * kickForce, ForceMode.Impulse);
                 kickAnimation.Play("Kick");
                 sfxSource.Play();
+
+                ChangeBoxColour(other.gameObject);
             }
         }
     }
@@ -89,10 +71,13 @@ public class CharacterKick : MonoBehaviour
         if (this.gameObject.CompareTag("Player1"))
         {
             box.GetComponent<BoxHandler>().lastTouch = "Player1";
+            //box.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
         if (this.gameObject.CompareTag("Player2"))
         {
             box.GetComponent<BoxHandler>().lastTouch = "Player2";
+            //box.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
+
 }

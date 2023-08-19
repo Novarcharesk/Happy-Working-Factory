@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8581687235710549353}
   m_Layer: 3
   m_Name: legRight
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 2161898959258763932}
+  rightTriggerPressed: 0
 --- !u!1 &3168570677693425448
 GameObject:
   m_ObjectHideFlags: 0

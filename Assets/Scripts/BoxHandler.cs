@@ -36,7 +36,7 @@ public class BoxHandler : MonoBehaviour
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
         }
         
-        monorailController = FindObjectOfType<MonorailController>().GetComponent<MonorailController>();
+            monorailController = FindObjectOfType<MonorailController>().GetComponent<MonorailController>();
     }
 
     // Checks to see if there has been a collision
