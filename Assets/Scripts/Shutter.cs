@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shutter : MonoBehaviour
 {
-    public GameObject shutter; // Reference to the shutter GameObject
+    public Animator animator; // Reference to the Animator component
     public float openDuration = 20f; // Duration for which the shutter remains open in seconds
     public float repeatDelay = 120f; // Delay between subsequent openings in seconds
 
@@ -14,8 +14,8 @@ public class Shutter : MonoBehaviour
 
     private void Start()
     {
-        // Initialize the timer to the repeat delay
-        timer = repeatDelay;
+        // Initialize the timer to the open duration
+        timer = openDuration;
     }
 
     private void Update()
@@ -52,16 +52,16 @@ public class Shutter : MonoBehaviour
 
     private void OpenShutter()
     {
-        // Play the shutter's opening animation here
-        shutter.GetComponent<Animation>().Play("OpenAnimation");
+        // Play the opening animation by setting the "RollerDoorOpen" parameter in the Animator
+        animator.SetBool("RollerDoorOpen", true);
 
         isOpen = true;
     }
 
     private void CloseShutter()
     {
-        // Play the shutter's closing animation here
-        shutter.GetComponent<Animation>().Play("CloseAnimation");
+        // Play the closing animation by setting the "RollerDoorOpen" parameter to false in the Animator
+        animator.SetBool("RollerDoorOpen", false);
 
         isOpen = false;
     }
