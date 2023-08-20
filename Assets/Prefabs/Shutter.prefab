@@ -108,11 +108,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4620045337085322307}
+  - component: {fileID: 2872588810713607269}
   - component: {fileID: 1693798257817697163}
   - component: {fileID: -6818583297507356840}
   - component: {fileID: 24666940674555271}
   m_Layer: 0
-  m_Name: RollerDoor
+  m_Name: Shutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,6 +137,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2872588810713607269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729937042152388862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b588914a1a23d4c96816d6e2d0c47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shutter: {fileID: 6729937042152388862}
+  openDuration: 20
+  repeatDelay: 120
 --- !u!65 &1693798257817697163
 BoxCollider:
   m_ObjectHideFlags: 0
