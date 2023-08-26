@@ -1,8 +1,6 @@
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +10,8 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody characterRB;
     public bool isSliding;
+    private float horizontalAxis;
+    private float verticalAxis;
 
     [Header("Controls")]
     [SerializeField] private KeyCode forwardKey;
@@ -60,7 +60,18 @@ public class PlayerController : MonoBehaviour
             isMoving = true;
             characterRB.velocity = Vector3.zero;
 
-            characterRB.velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * movementSpeed;
+            if (playerInputIndex == 0)
+            {
+                horizontalAxis = Input.GetAxis("Horizontal");
+                verticalAxis = Input.GetAxis("Vertical");
+            }
+            else if (playerInputIndex == 1)
+            {
+                horizontalAxis = Input.GetAxis("HorizontalP2");
+                verticalAxis = Input.GetAxis("VerticalP2");
+            }
+
+            characterRB.velocity = new Vector3(horizontalAxis, 0, verticalAxis) * movementSpeed;
             Quaternion toRotation = Quaternion.LookRotation(characterRB.velocity, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, movementSpeed);
         }

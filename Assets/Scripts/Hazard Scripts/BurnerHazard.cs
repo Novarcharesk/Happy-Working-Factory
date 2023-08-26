@@ -42,6 +42,7 @@ public class BurnerHazard : MonoBehaviour
     public IEnumerator StopBurning(GameObject box)
     {
         yield return new WaitForSeconds(burnDuration);
+        fireJetParticles.Stop();
 
         // Re-enable the box's collider and renderer after burning is done
         box.GetComponent<Collider>().enabled = true;
@@ -54,7 +55,5 @@ public class BurnerHazard : MonoBehaviour
         {
             boxHealth.TakeDamage(damageAmount);
         }
-
-        fireJetParticles.Stop();
     }
 }
