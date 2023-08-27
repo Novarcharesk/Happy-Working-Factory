@@ -6,48 +6,40 @@ public class Shutter : MonoBehaviour
 {
     public Animator animator; // Reference to the Animator component
     public float openDuration = 20f; // Duration for which the shutter remains open in seconds
-    public float repeatDelay = 120f; // Delay between subsequent openings in seconds
+    public float cycleDelay = 120f; // Delay between cycles in seconds
+    public float initialDelay = 120f; // Initial delay before the first cycle in seconds
 
     private bool isOpen = false;
     private float timer = 0f;
-    private bool gameStarted = false;
 
     private void Start()
     {
-        // Initialize the timer to the open duration
-        timer = openDuration;
+        // Initialize the timer to the initial delay
+        timer = initialDelay;
+
+        // Start the coroutine for the shutter cycle
+        StartCoroutine(ShutterCycle());
     }
 
-    private void Update()
+    private IEnumerator ShutterCycle()
     {
-        // Only start the timer and update behavior if the game has started
-        if (!gameStarted)
+        // Wait for the initial delay before starting the first cycle
+        yield return new WaitForSeconds(initialDelay);
+
+        while (true)
         {
-            return;
+            // Open the shutter
+            OpenShutter();
+
+            // Wait for the open duration
+            yield return new WaitForSeconds(openDuration);
+
+            // Close the shutter
+            CloseShutter();
+
+            // Wait for the cycle delay
+            yield return new WaitForSeconds(cycleDelay - openDuration);
         }
-
-        timer -= Time.deltaTime;
-
-        if (timer <= 0f)
-        {
-            if (!isOpen)
-            {
-                OpenShutter();
-            }
-            else
-            {
-                CloseShutter();
-            }
-
-            // Reset the timer based on whether the shutter is currently open or closed
-            timer = isOpen ? repeatDelay : openDuration;
-        }
-    }
-
-    public void StartGame()
-    {
-        // Call this method to start the game and initiate the shutter behavior
-        gameStarted = true;
     }
 
     private void OpenShutter()
