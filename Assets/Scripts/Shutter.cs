@@ -30,12 +30,14 @@ public class Shutter : MonoBehaviour
         {
             // Open the shutter
             OpenShutter();
+            isOpen = true;
 
             // Wait for the open duration
             yield return new WaitForSeconds(openDuration);
 
             // Close the shutter
             CloseShutter();
+            isOpen = false;
 
             // Wait for the cycle delay
             yield return new WaitForSeconds(cycleDelay - openDuration);
@@ -56,5 +58,30 @@ public class Shutter : MonoBehaviour
         animator.SetBool("RollerDoorOpen", false);
 
         isOpen = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Box") && isOpen == true)
+        {
+            Destroy(collision.gameObject);
+
+            ScoreUI scoreUI = FindObjectOfType<ScoreUI>();
+
+            if (scoreUI != null)
+            {
+                string lastTouchedBy = collision.gameObject.GetComponent<BoxHandler>().lastTouch;
+                if (lastTouchedBy == "Player1")
+                {
+                    scoreUI.IncreasePlayer1Score();
+                    scoreUI.IncreasePlayer1Score();
+                }
+                else if (lastTouchedBy == "Player2")
+                {
+                    scoreUI.IncreasePlayer2Score();
+                    scoreUI.IncreasePlayer2Score();
+                }
+            }
+        }
     }
 }

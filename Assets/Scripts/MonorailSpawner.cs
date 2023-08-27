@@ -15,6 +15,8 @@ public class MonorailSpawner : MonoBehaviour
     [SerializeField] public GameObject leftMonorailBoundary;
     [SerializeField] public GameObject rightMonorailBoundary;
     [SerializeField] public GameObject midMonorailPosition;
+    [SerializeField] private float monorailOffsetX;
+    [SerializeField] private float monorailOffsetZ;
 
     // Plays at start
     private void Start()
@@ -36,6 +38,6 @@ public class MonorailSpawner : MonoBehaviour
     private void SpawnMonorail()
     {
         monorailPresent = true;
-        spawnedMonorail = Instantiate(monorailPrefab, new Vector3(leftMonorailBoundary.transform.position.x -10, 0, -10.5f), Quaternion.identity, this.transform);
+        spawnedMonorail = Instantiate(monorailPrefab, new Vector3(leftMonorailBoundary.transform.position.x - monorailOffsetX, 0, monorailOffsetZ), Quaternion.identity, this.transform);
     }
 }
